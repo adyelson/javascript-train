@@ -5,6 +5,7 @@ function bubbleSort(lista) {
     let teveTroca = false;
 
     for (let w = 0; w < lista.length - 1; w++) {
+        teveTroca = false;
         for (let x = 0; x < lista.length - w - 1; x++) {
             if (lista[x] > lista[x + 1]) {
                 let temp = lista[x];
