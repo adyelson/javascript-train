@@ -18,7 +18,7 @@ function bubbleSort(lista) {
             break;
         }
     }
-    return [array, q];
+    return [lista, contador];
 }
 
 
