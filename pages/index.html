@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="processar_dados" method="GET">
+        Nome: <input type="text" name="nome"><br>
+        Idade: <input type="number" name="idade"><br>
+        <input type="submit" value="Enviar">
+    </form> 
+    <hr>
+    <form action="enviar_dados" method="POST">
+        Nome: <input type="text" name="nome"><br>
+        Idade: <input type="number" name="idade"><br>
+        <input type="submit" value="Enviar">
+    </form>  
+    <hr>
+    <form action="upload" method="POST" enctype="multipart/form-data">
+        Nome: <input type="text" name="nome"><br>
+        Idade: <input type="number" name="idade"><br>
+        Foto: <input type="file" name="foto"><br>
+
+        <input type="submit" value="Enviar">
+    </form>    
+    <hr>
+    <form action="logar" method="POST">
+        Usuário: <input type="text" name="usuario"><br>
+        Senha: <input type="password" name="senha"><br>
+        
+
+        <input type="submit" value="Enviar">
+    </form>   
+    <h1>XX Minha página</h1>
+    <ul id='lista'>
+        <li id='item_lista'>Sample</li>
+    </ul>
+    <script>
+        let lista = document.querySelector("#lista");
+        let itens = ["um", "dois", "tres", "quatro"]
+
+
+        itens.forEach(item => {
+            let liSample = document.querySelector("#item_lista").cloneNode(true)
+
+            liSample.innerHTML = item;
+            
+            lista.appendChild(liSample);
+        });
+
+    </script>
+</body>
+
+</html>
