@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <header>
+        <form id="form">
+
+            <input type="text" id="msg" autofocus autocomplete="off" placeholder="Escreva seu nome">
+            <button type="submit">Enviar</button>
+        </form>
+    </header>
+    <ul id="mensagens">
+
+    </ul>
+
+    <div id="status"></div>
+    <script>
+        const socket = io();
+        socket.nickname = ''
+        var form = document.getElementById('form');
+        var msg = document.getElementById('msg');
+        var statusDiv = document.getElementById('status');
+
+
+
+        form.addEventListener("submit", function (evt) {
+            if (socket.nickname === '') {
+                socket.nickname = msg.value;
+                socket.emit('login', socket.nickname);
+                msg.setAttribute('placeholder', 'Escreva a mensagem...')
+
+                msg.addEventListener("keydown", () => {
+                socket.emit('status', `${socket.nickname} está digitando...`)
+                })
+                msg.addEventListener("keyup", () => {
+                    setTimeout(() => {
+                        socket.emit('status', ``)
+                    }, 4000);
+                
+                })
+            } else {
+                socket.emit('chat msg', msg.value);
+            }
+            msg.value = '';
+            evt.preventDefault();
+        });
+
+        socket.on('chat msg', (mensagem) => {
+            var liel = document.createElement('li');
+            liel.innerHTML = mensagem;
+            document.getElementById('mensagens').appendChild(liel);
+        })
+
+        socket.on('status', (mensagem) => {
+            statusDiv.innerHTML = mensagem;
+        })
+    </script>
+</body>
+
+</html>
