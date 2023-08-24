@@ -22,46 +22,8 @@
     </ul>
 
     <div id="status"></div>
-    <script>
-        const socket = io();
-        socket.nickname = ''
-        var form = document.getElementById('form');
-        var msg = document.getElementById('msg');
-        var statusDiv = document.getElementById('status');
-
-
-
-        form.addEventListener("submit", function (evt) {
-            if (socket.nickname === '') {
-                socket.nickname = msg.value;
-                socket.emit('login', socket.nickname);
-                msg.setAttribute('placeholder', 'Escreva a mensagem...')
-
-                msg.addEventListener("keydown", () => {
-                socket.emit('status', `${socket.nickname} está digitando...`)
-                })
-                msg.addEventListener("keyup", () => {
-                    setTimeout(() => {
-                        socket.emit('status', ``)
-                    }, 4000);
-                
-                })
-            } else {
-                socket.emit('chat msg', msg.value);
-            }
-            msg.value = '';
-            evt.preventDefault();
-        });
-
-        socket.on('chat msg', (mensagem) => {
-            var liel = document.createElement('li');
-            liel.innerHTML = mensagem;
-            document.getElementById('mensagens').appendChild(liel);
-        })
-
-        socket.on('status', (mensagem) => {
-            statusDiv.innerHTML = mensagem;
-        })
+    <script src="index.js">
+    
     </script>
 </body>
 
